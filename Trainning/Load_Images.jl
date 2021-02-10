@@ -21,7 +21,7 @@ TI = Array{Float32}(undef, 50, 50, 1, m)
 Y = onehotbatch(Y_rT, mClass);
 
 #Definimos la ruta de los archivos
-str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/Traffic-Light-AI/mlight/"
+str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_00/"
 
 #Creamos el tensor de imagenes de entrenamiento
 for i in 1:m
@@ -29,34 +29,34 @@ for i in 1:m
     TI[:,:,:,i] = mChannelImg(mImg)
 end
 
-# ################################################################################
-# #Arreglamos los datos de Entrenamiento
-#
-# #Tamaño de la epoca
-# tN = 250
-# #Tamaño de la muestra
-# tM = 1000
-#
-# function mTrain()
-#    mT = sample(1:m,tM,replace=false)
-#    data_TRAIN = TI[:,:,:,mT]
-#    Y_TRAIN = Y[:,mT]
-#    return DataLoader((data_TRAIN,Y_TRAIN),batchsize= tN)
-# end
-#
-# # ################################################################################
-# #Entrenamos el modelo
-# #Inicio el tiempo de entrenamiento
-# t1 = time_ns()
-# mT = 200
-# opt = ADAM(0.001)
-# for i in 1:mT
-#    Flux.train!(Loss,params(modelo),mTrain(),opt);
-# end
-# #Fin tiempo de entrenamiento
-# t2 = time_ns()
-#
-# #Guardamos los parámetros del modelo
-# SaveModel()
-#
-# print("Tiempo Empleado: ", (t2-t1)/60.0e9, " minutos.")
+################################################################################
+#Arreglamos los datos de Entrenamiento
+
+#Tamaño de la epoca
+tN = 250
+#Tamaño de la muestra
+tM = 1000
+
+function mTrain()
+   mT = sample(1:m,tM,replace=false)
+   data_TRAIN = TI[:,:,:,mT]
+   Y_TRAIN = Y[:,mT]
+   return DataLoader((data_TRAIN,Y_TRAIN),batchsize= tN)
+end
+
+################################################################################
+#Entrenamos el modelo
+#Inicio el tiempo de entrenamiento
+t1 = time_ns()
+mT = 200
+opt = ADAM(0.001)
+for i in 1:mT
+   Flux.train!(Loss,params(modelo),mTrain(),opt);
+end
+#Fin tiempo de entrenamiento
+t2 = time_ns()
+
+#Guardamos los parámetros del modelo
+SaveModel("circle03")
+
+print("Tiempo Empleado: ", (t2-t1)/60.0e9, " minutos.")

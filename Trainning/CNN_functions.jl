@@ -26,6 +26,12 @@ function mChannelImg(IMG)
     return T
 end
 
+# Función que calcula el promedio de un vector binario
+function mCoef(v)
+    nimu = length(v)
+    return sum(v)/nimu
+end
+
 #Guarda los parmatros del modelo
 function SaveModel(number)
     weights = params(modelo)

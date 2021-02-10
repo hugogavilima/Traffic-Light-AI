@@ -43,23 +43,23 @@ function mCircles(a,b,n; grosor = 0)
 end
 
 #Definimos la ruta de los archivos de entrenamiento
-str_train = "/home/aquilesbailo/Traffic-Light-AI/mlight/"
+str_train = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_00/"
 
-IND = zeros(10999)
-train = zeros(10999)
+IND = zeros(11000)
+train = zeros(11000)
 
-for i in 1:10999
+for i in 0:10999
 
     #Obtenemos la clase de la imagen
     p = convert(Int64, floor(i/1000))
 
     #Creamos la imagen
     img  = mCircles(50,50,p, grosor = 0)
-    save(str_train*string(i)*".jpg",img)
+    save(str_train*string(i+1)*".jpg",img)
 
     #Salvamos la clase de cad imagen
-    IND[i] = i
-    train[i] = p
+    IND[i+1] = i+1
+    train[i+1] = p
 end
 
 #Salvamos los indices de las imagenes
