@@ -65,21 +65,38 @@ end
 #     softmax
 # )
 
-# Tiempo: 101.68 minutos
-# MODELO circle03
+# # Tiempo: 101.68 minutos
+# # MODELO circle03
+# modelo = Chain(
+#     Conv((3,3),1=>64,pad=1,relu),
+#     MaxPool((2,2)),
+#     Conv((3,3),64=>128,pad=1,relu),
+#     MaxPool((2,2)),
+#     Conv((3,3),128=>128,pad=1,relu),
+#     MaxPool((2,2)),
+#     Conv((3,3),128=>128,pad=1,relu),
+#     MaxPool((2,2)),
+#     Conv((3,3),128=>256,pad=1,relu),
+#     MaxPool((2,2)),
+#     x->reshape(x,:,size(x,4)),
+#     Dense(256, 11),
+#     BatchNorm(11, relu),
+#     softmax
+# )
+
+# Tiempo: 167.44 minutos
+# MODELO circle04
 modelo = Chain(
     Conv((3,3),1=>64,pad=1,relu),
     MaxPool((2,2)),
     Conv((3,3),64=>128,pad=1,relu),
     MaxPool((2,2)),
-    Conv((3,3),128=>128,pad=1,relu),
-    MaxPool((2,2)),
-    Conv((3,3),128=>128,pad=1,relu),
-    MaxPool((2,2)),
     Conv((3,3),128=>256,pad=1,relu),
     MaxPool((2,2)),
+    Conv((3,3),256=>512,pad=1,relu),
+    MaxPool((2,2)),
     x->reshape(x,:,size(x,4)),
-    Dense(256, 11),
+    Dense(4608,11),
     BatchNorm(11, relu),
     softmax
 )
