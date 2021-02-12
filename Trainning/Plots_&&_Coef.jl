@@ -6,7 +6,7 @@ using DataFrames, CSV, Plots
 include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_functions.jl")
 ################################################################################
 #Definimos el nombre del modelo a evaluar
-name = "circle04"
+name = "circle05"
 str_res = "/home/aquilesbailo/Traffic-Light-AI/Trainning/results/"
 ################################################################################
 

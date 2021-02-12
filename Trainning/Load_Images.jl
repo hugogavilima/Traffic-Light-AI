@@ -37,6 +37,7 @@ tN = 250
 #Tamaño de la muestra
 tM = 1000
 
+
 function mTrain()
    mT = sample(1:m,tM,replace=false)
    data_TRAIN = TI[:,:,:,mT]
@@ -52,11 +53,12 @@ mT = 200
 opt = ADAM(0.001)
 for i in 1:mT
    Flux.train!(Loss,params(modelo),mTrain(),opt);
+   print(i, "\n")
 end
 #Fin tiempo de entrenamiento
 t2 = time_ns()
 
 #Guardamos los parámetros del modelo
-SaveModel("circle04")
+SaveModel("circle05")
 
 print("Tiempo Empleado: ", (t2-t1)/60.0e9, " minutos.")
