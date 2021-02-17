@@ -6,7 +6,7 @@ using DataFrames, CSV, Plots
 include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_functions.jl")
 ################################################################################
 #Definimos el nombre del modelo a evaluar
-name = "circle05"
+name = "circle03"
 str_res = "/home/aquilesbailo/Traffic-Light-AI/Trainning/results/"
 ################################################################################
 
@@ -23,7 +23,7 @@ end
 ################################################################################
 #Salvamos el resultado en un archivo csv
 T_result = DataFrame(Ind = IND, RESULT = y_FINAL)
-CSV.write(str_res*name*".csv", T_result);
+CSV.write(str_res*name*"_test.csv", T_result);
 
 ################################################################################
 #Obtenemos el vector de valoración cruzada y los coeficientes por clases
@@ -65,4 +65,4 @@ p2 = heatmap(x_pr, y_pr, mPC',
     size =(700, 500)
      )
 plot(p2, p1, size =(1700, 500))
-png(str_res*name)
+png(str_res*name*"_test")

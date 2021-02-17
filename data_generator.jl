@@ -43,7 +43,7 @@ function mCircles(a,b,n; grosor = 0)
 end
 
 #Definimos la ruta de los archivos de entrenamiento
-str_train = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_00/"
+str_train = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_00_test/"
 
 IND = zeros(11000)
 train = zeros(11000)
@@ -52,6 +52,9 @@ for i in 0:10999
 
     #Obtenemos la clase de la imagen
     p = convert(Int64, floor(i/1000))
+
+    #Obtenemos el valor de la clase de manera aleatoria (para testmode)
+    #p = convert(Int64, floor(10*rand()))
 
     #Creamos la imagen
     img  = mCircles(50,50,p, grosor = 0)
@@ -64,4 +67,4 @@ end
 
 #Salvamos los indices de las imagenes
 Table = DataFrame(Ind = IND, TRAIN = train)
-CSV.write("train_data.csv", Table);
+CSV.write("test_mode_circle_00.csv", Table);
