@@ -8,7 +8,7 @@ include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_modelo.jl")
 include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_functions.jl")
 ################################################################################
 #Cargamos los datos a memoria
-df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/test_mode_circle_00.csv", DataFrame)
+df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/test_mode_circle_06.csv", DataFrame)
 IND = convert(Array, df_train.Ind)
 Y_rT = convert(Array, df_train.TRAIN)
 
@@ -21,7 +21,7 @@ TI = Array{Float32}(undef, 50, 50, 1, m)
 Y = onehotbatch(Y_rT, mClass);
 
 #Definimos la ruta de los archivos
-str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_00_test/"
+str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_06_test/"
 
 #Creamos el tensor de imagenes de entrenamiento
 for i in 1:m
