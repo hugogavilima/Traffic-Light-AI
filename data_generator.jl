@@ -4,7 +4,7 @@ using DataFrames, CSV
 include("/home/aquilesbailo/Traffic-Light-AI/data_Functions.jl")
 
 #Definimos la ruta de los archivos de entrenamiento
-str_train = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_06_test/"
+str_train = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_06/"
 
 IND = zeros(11000)
 train = zeros(11000)
@@ -28,4 +28,4 @@ end
 
 #Salvamos los indices de las imagenes
 Table = DataFrame(Ind = IND, TRAIN = train)
-CSV.write("test_mode_circle_06.csv", Table);
+CSV.write("train_mode_circle_06.csv", Table);
