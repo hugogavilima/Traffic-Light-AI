@@ -8,9 +8,9 @@ include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_modelo.jl")
 include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_functions.jl")
 ################################################################################
 #Cargamos los datos a memoria
-df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/test_mode_circle_06.csv", DataFrame)
-IND = convert(Array, df_train.Ind)
-Y_rT = convert(Array, df_train.TRAIN)
+df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/train_mode_circle_06.csv", DataFrame)
+IND = convert(Array, df_train.Ind[1001:end])
+Y_rT = convert(Array, df_train.TRAIN[1001:end])
 
 #Tamaño del conjunto
 m = length(Y_rT)
@@ -21,10 +21,10 @@ TI = Array{Float32}(undef, 50, 50, 1, m)
 Y = onehotbatch(Y_rT, mClass);
 
 #Definimos la ruta de los archivos
-str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_06_test/"
+str_dir = "/home/aquilesbailo/Traffic-Light-AI/Data Bases/Circles/circle_06/"
 
 #Creamos el tensor de imagenes de entrenamiento
-for i in 1:m
+for i in 1001:m
     mImg = load(str_dir*string(i)*".jpg")
     TI[:,:,:,i] = mChannelImg(mImg)
 end
@@ -37,7 +37,7 @@ tN = 250
 #Tamaño de la muestra
 tM = 1000
 
-
+Flux.trainmode!(modelo[13], true)
 function mTrain()
    mT = sample(1:m,tM,replace=false)
    data_TRAIN = TI[:,:,:,mT]
@@ -49,7 +49,7 @@ end
 #Entrenamos el modelo
 #Inicio el tiempo de entrenamiento
 t1 = time_ns()
-mT = 200
+mT = 100
 opt = ADAM(0.001)
 for i in 1:mT
    Flux.train!(Loss,params(modelo),mTrain(),opt);
@@ -59,6 +59,6 @@ end
 t2 = time_ns()
 
 #Guardamos los parámetros del modelo
-SaveModel("circle08")
+SaveModel("circle08_P1")
 
 print("Tiempo Empleado: ", (t2-t1)/60.0e9, " minutos.")

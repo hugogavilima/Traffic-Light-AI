@@ -6,12 +6,13 @@ using DataFrames, CSV, Plots
 include("/home/aquilesbailo/Traffic-Light-AI/Trainning/CNN_functions.jl")
 ################################################################################
 #Definimos el nombre del modelo a evaluar
-name = "circle08"
-str_res = "/home/aquilesbailo/Traffic-Light-AI/Trainning/results/circle_06_test/"
+name = "circle08_P1"
+str_res = "/home/aquilesbailo/Traffic-Light-AI/Trainning/results/circle_06/"
 ################################################################################
 
 #Cargamos los parametros del modelo requerido
 LoadModel(name)
+Flux.testmode!(modelo[13], true)
 
 #Obtenemos el vector de predicción. Esta es una versión no mutable de onecold(modelo(TI))
 y_FINAL = Array{Float64}(undef,m)
@@ -30,21 +31,21 @@ CSV.write(str_res*name*".csv", T_result);
 Pred = (y_FINAL .== Y_rT)
 
 mBJ = reshape(Pred, 1000, :)'
-mPC = zeros(11, 10)
-mPB = zeros(12)
+mPC = zeros(10, 10)
+mPB = zeros(11)
 
-for i in 1:11
+for i in 1:10
     mPB[i] = mCoef(mBJ[i, :])
     mTC = reshape(mBJ[i, :], 100, :)'
     for j in 1:10
         mPC[i,j] = mCoef(mTC[j, :])
     end
 end
-mPB[12] = mCoef(Pred)
+mPB[end] = mCoef(Pred)
 
 ################################################################################
 #Creamos los graficos apropiados
-clases = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Total"]
+clases = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Total"]
 p1 = bar(clases, mPB,
     xticks= (0:0.05:1),
     orientation =:h,
@@ -55,11 +56,11 @@ p1 = bar(clases, mPB,
     title = ""
     )
 
-x_pr = convert(Array,1:1:11)
+x_pr = convert(Array,1:1:10)
 y_pr = convert(Array,1:1:10)
 p2 = heatmap(x_pr, y_pr, mPC',
     framestyle =:box,
-    xticks= (1:11, ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]),
+    xticks= (1:10, [ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]),
     yticks= ((1:1:10)),
     title = "",
     size =(700, 500)

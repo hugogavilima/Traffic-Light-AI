@@ -3,7 +3,7 @@ using DelimitedFiles
 using DataFrames
 
 #Cargamos los datos a memoria
-df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Trainning/results/circle_06_test/circle08.csv", DataFrame)
+df_train = CSV.read("/home/aquilesbailo/Traffic-Light-AI/Trainning/results/circle_06_test/6.csv", DataFrame)
 Y_P = convert(Array{Int64,1}, df_train.RESULT)
 
 #creamos la matriz
